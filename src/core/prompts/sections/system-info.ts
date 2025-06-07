@@ -21,8 +21,8 @@ Current Workspace Directory: ${cwd.toPosix()}
   - Recursive file list for workspace directory ('/test/path') provided in environment_details
   - Reveals project structure insights (organization patterns, language usage)
 - External directory exploration: 
-  - Use `list_files` tool 
-  - Set `recursive=true` for nested structure analysis
+  - Use \`list_files\` tool 
+  - Set \`recursive=true\` for nested structure analysis
   - Use non-recursive for top-level views (e.g., Desktop)
 `
 

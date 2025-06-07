@@ -14,7 +14,7 @@ Description:
      - Use relative paths (./example)
      - Avoid location-sensitive paths
   4. Optional:
-     - Can specify working directory via `cwd`
+     - Can specify working directory via \`cwd\`
 Parameters:
 - command: (required) The CLI command to execute. This should be valid for the current operating system. Ensure the command is properly formatted and does not contain any harmful instructions.
 - cwd: (optional) The working directory to execute the command in (default: ${args.cwd})

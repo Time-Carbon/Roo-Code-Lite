@@ -59,19 +59,19 @@ export function getRulesSection(cwd: string, supportsComputerUse: boolean, diffS
 
 RULES
 
-- Project base directory: `${cwd.toPosix()}` – all paths must be relative to this.
+- Project base directory: \`${cwd.toPosix()}\` all paths must be relative to this.
 - Path handling: 
-  - Never use `~` or `$HOME` 
+  - Never use \`~\` or \`$HOME\` 
   - Cannot change working directory from '${cwd.toPosix()}'
-  - For external directory commands, prepend with `cd <path> &&`
+  - For external directory commands, prepend with \`cd <path> &&\`
 - Tool usage rules:
-  - Before `execute_command`: analyze SYSTEM INFORMATION and directory requirements
+  - Before \`execute_command\`: analyze SYSTEM INFORMATION and directory requirements
   - For searches: ${codebaseSearchRule}craft precise regex patterns${isCodebaseSearchAvailable ? " after codebase_search" : ""}
   - New projects: create dedicated directory with logical structure
   - Editing: ${getEditingInstructions(diffStrategy)} (restricted by mode)
-  - File access: skip `read_file` if user provides contents directly
+  - File access: skip \`read_file\` if user provides contents directly
 - User interaction:
-  - Use `ask_followup_question` only for missing required parameters
+  - Use \`ask_followup_question\` only for missing required parameters
   - Provide 2-4 actionable suggestions per question
   - Prefer tool usage over questioning
   - Never end with conversational prompts

@@ -7,10 +7,10 @@ export function getBrowserActionDescription(args: ToolArgs): string | undefined 
 	return `## browser_action
 Description:
 - Puppeteer browser interaction rules:
-  1. Always start with `launch` and end with `close`
+  1. Always start with \`launch\` and end with \`close\`
   2. One action per message - wait for screenshot/logs response
   3. To visit new unreachable URL: close → relaunch
-  4. Only `browser_action` allowed while browser is open
+  4. Only \`browser_action\` allowed while browser is open
   5. Resolution: ${args.browserViewportSize} pixels
   6. Click actions:
      - Verify coordinates via screenshot first
