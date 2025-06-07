@@ -13,11 +13,5 @@ Usage:
 <mode>your-mode-slug-here</mode>
 <message>Your initial instructions here</message>
 </new_task>
-
-Example:
-<new_task>
-<mode>code</mode>
-<message>Implement a new feature for the application.</message>
-</new_task>
 `
 }

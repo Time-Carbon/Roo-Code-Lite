@@ -18,15 +18,18 @@ export const formatResponse = {
 		`Access to ${path} is blocked by the .rooignore file settings. You must try to continue in the task without using this file, or ask the user to update the .rooignore file.`,
 
 	noToolsUsed: () =>
-		`[ERROR] You did not use a tool in your previous response! Please retry with a tool use.
+		`\`\`\`[ERROR]You didn't use any tools. If you have forgotten how to use tools.Here is instructions you need:
 
 ${toolUseInstructionsReminder}
+
+If you don't need to use tools, please ignore this message.
+\`\`\`
 
 # Next Steps
 
 If you have completed the user's task, use the attempt_completion tool. 
 If you require additional information from the user, use the ask_followup_question tool. 
-Otherwise, if you have not completed the task and do not need additional information, then proceed with the next step of the task. 
+If neither of them, then proceed with the next step of the task. 
 (This is an automated message, so do not respond to it conversationally.)`,
 
 	tooManyMistakes: (feedback?: string) =>
@@ -184,14 +187,7 @@ const formatImagesIntoBlocks = (images?: string[]): Anthropic.ImageBlockParam[] 
 
 const toolUseInstructionsReminder = `# Reminder: Instructions for Tool Use
 
-Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
-
-<actual_tool_name>
-<parameter1_name>value1</parameter1_name>
-<parameter2_name>value2</parameter2_name>
-...
-</actual_tool_name>
-
+Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. 
 For example, to use the attempt_completion tool:
 
 <attempt_completion>

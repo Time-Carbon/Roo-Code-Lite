@@ -2,53 +2,62 @@ import { DiffStrategy } from "../../../shared/tools"
 import { McpHub } from "../../../services/mcp/McpHub"
 
 export async function getMcpServersSection(
-	mcpHub?: McpHub,
-	diffStrategy?: DiffStrategy,
-	enableMcpServerCreation?: boolean,
+        mcpHub?: McpHub,
+        diffStrategy?: DiffStrategy,
+        enableMcpServerCreation?: boolean,
 ): Promise<string> {
-	if (!mcpHub) {
-		return ""
-	}
+        if (!mcpHub) {
+                return ""
+        }
 
-	const connectedServers =
-		mcpHub.getServers().length > 0
-			? `${mcpHub
-					.getServers()
-					.filter((server) => server.status === "connected")
-					.map((server) => {
-						const tools = server.tools
-							?.map((tool) => {
-								const schemaStr = tool.inputSchema
-									? `    Input Schema:
-		${JSON.stringify(tool.inputSchema, null, 2).split("\n").join("\n    ")}`
-									: ""
+        const connectedServers =
+                mcpHub.getServers().length > 0
+                        ? `${mcpHub
+                                        .getServers()
+                                        .filter((server) => server.status === "connected")
+                                        .map((server) => {
+                                                const tools = server.tools
+                                                        ?.map((tool) => {
+                                                                let toolStr = `- ${tool.name}: "${tool.description}"`
+                                                                
+                                                                // 处理inputSchema的转换
+                                                                if (tool.inputSchema?.properties) {
+                                                                        const props = Object.entries(tool.inputSchema.properties)
+                                                                                .map(([key, value]) => {
+                                                                                        const desc = value.description || "";
+                                                                                        return `  - ${key}: "${desc}"`
+                                                                                })
+                                                                                .join("\n");
+                                                                        
+                                                                        toolStr += `\n${props}`
+                                                                }
+                                                                
+                                                                return toolStr;
+                                                        })
+                                                        .join("\n\n")
 
-								return `- ${tool.name}: ${tool.description}\n${schemaStr}`
-							})
-							.join("\n\n")
+                                                const templates = server.resourceTemplates
+                                                        ?.map((template) => `- ${template.uriTemplate} (${template.name}): ${template.description}`)
+                                                        .join("\n")
 
-						const templates = server.resourceTemplates
-							?.map((template) => `- ${template.uriTemplate} (${template.name}): ${template.description}`)
-							.join("\n")
+                                                const resources = server.resources
+                                                        ?.map((resource) => `- ${resource.uri} (${resource.name}): ${resource.description}`)
+                                                        .join("\n")
 
-						const resources = server.resources
-							?.map((resource) => `- ${resource.uri} (${resource.name}): ${resource.description}`)
-							.join("\n")
+                                                const config = JSON.parse(server.config)
 
-						const config = JSON.parse(server.config)
+                                                return (
+                                                        `## ${server.name} (\`${config.command}${config.args && Array.isArray(config.args) ? ` ${config.args.join(" ")}` : ""}\`)` +
+                                                        (server.instructions ? `\n\n### Instructions\n${server.instructions}` : "") +
+                                                        (tools ? `\n\n### Available Tools\n${tools}` : "") +
+                                                        (templates ? `\n\n### Resource Templates\n${templates}` : "") +
+                                                        (resources ? `\n\n### Direct Resources\n${resources}` : "")
+                                                )
+                                        })
+                                        .join("\n\n")}`
+                        : "(No MCP servers currently connected)"
 
-						return (
-							`## ${server.name} (\`${config.command}${config.args && Array.isArray(config.args) ? ` ${config.args.join(" ")}` : ""}\`)` +
-							(server.instructions ? `\n\n### Instructions\n${server.instructions}` : "") +
-							(tools ? `\n\n### Available Tools\n${tools}` : "") +
-							(templates ? `\n\n### Resource Templates\n${templates}` : "") +
-							(resources ? `\n\n### Direct Resources\n${resources}` : "")
-						)
-					})
-					.join("\n\n")}`
-			: "(No MCP servers currently connected)"
-
-	const baseSection = `MCP SERVERS
+        const baseSection = `MCP SERVERS
 
 The Model Context Protocol (MCP) enables communication between the system and MCP servers that provide additional tools and resources to extend your capabilities. MCP servers can be one of two types:
 
@@ -61,18 +70,18 @@ When a server is connected, you can use the server's tools via the \`use_mcp_too
 
 ${connectedServers}`
 
-	if (!enableMcpServerCreation) {
-		return baseSection
-	}
+        if (!enableMcpServerCreation) {
+                return baseSection
+        }
 
-	return (
-		baseSection +
-		`
+        return (
+                baseSection +
+                `
 ## Creating an MCP Server
 
 The user may ask you something along the lines of "add a tool" that does some function, in other words to create an MCP server that provides tools and resources that may connect to external APIs for example. If they do, you should obtain detailed instructions on this topic using the fetch_instructions tool, like this:
 <fetch_instructions>
 <task>create_mcp_server</task>
 </fetch_instructions>`
-	)
+        )
 }

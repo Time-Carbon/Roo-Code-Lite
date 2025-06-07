@@ -18,22 +18,5 @@ Optional Parameters:
 Notes:
 - When use_regex is true, the search parameter is treated as a regular expression pattern
 - When ignore_case is true, the search is case-insensitive regardless of regex mode
-
-Examples:
-
-1. Simple text replacement:
-<search_and_replace>
-<path>example.ts</path>
-<search>oldText</search>
-<replace>newText</replace>
-</search_and_replace>
-
-2. Case-insensitive regex pattern:
-<search_and_replace>
-<path>example.ts</path>
-<search>old\w+</search>
-<replace>new$&</replace>
-<use_regex>true</use_regex>
-<ignore_case>true</ignore_case>
-</search_and_replace>`
+`
 }

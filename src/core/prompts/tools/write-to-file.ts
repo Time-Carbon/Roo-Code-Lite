@@ -15,26 +15,5 @@ Your file content here
 </content>
 <line_count>total number of lines in the file, including empty lines</line_count>
 </write_to_file>
-
-Example: Requesting to write to frontend-config.json
-<write_to_file>
-<path>frontend-config.json</path>
-<content>
-{
-  "apiEndpoint": "https://api.example.com",
-  "theme": {
-    "primaryColor": "#007bff",
-    "secondaryColor": "#6c757d",
-    "fontFamily": "Arial, sans-serif"
-  },
-  "features": {
-    "darkMode": true,
-    "notifications": true,
-    "analytics": false
-  },
-  "version": "1.0.0"
-}
-</content>
-<line_count>14</line_count>
-</write_to_file>`
+`
 }

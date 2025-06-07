@@ -11,10 +11,5 @@ Usage:
 <path>Directory path here</path>
 <recursive>true or false (optional)</recursive>
 </list_files>
-
-Example: Requesting to list all files in the current directory
-<list_files>
-<path>.</path>
-<recursive>false</recursive>
-</list_files>`
+`
 }

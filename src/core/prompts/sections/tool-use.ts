@@ -9,18 +9,26 @@ You have access to a set of tools that are executed upon the user's approval. Yo
 
 Tool uses are formatted using XML-style tags. The tool name itself becomes the XML tag name. Each parameter is enclosed within its own set of tags. Here's the structure:
 
+\`\`\`xml
 <actual_tool_name>
 <parameter1_name>value1</parameter1_name>
 <parameter2_name>value2</parameter2_name>
 ...
 </actual_tool_name>
+\`\`\`
 
-For example, to use the new_task tool:
+For example, to use the read_file tool:
 
-<new_task>
-<mode>code</mode>
-<message>Implement a new feature for the application.</message>
-</new_task>
+\`\`\`xml
+<read_file>
+<args>
+  <file>
+    <path>path/to/file</path>
+    
+  </file>
+</args>
+</read_file>
+\`\`\`
 
 Always use the actual tool name as the XML tag name for proper parsing and execution.`
 }
