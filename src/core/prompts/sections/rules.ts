@@ -81,7 +81,7 @@ RULES
   - Wait for user confirmation after each tool use
   ${supportsComputerUse ? '- For non-dev tasks: prefer browser_action or MCP tools over custom solutions' : ''}
 - Completion protocol:
-  - Use `attempt_completion` to present final results
+  - Use \`attempt_completion\` to present final results
   - Include demo CLI commands when applicable
   - Never end with open-ended questions
 - Context handling:
