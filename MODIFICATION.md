@@ -1,7 +1,7 @@
 # Project Modification Notes
 
 ## License Declaration
-This branch is modified from the original repository ([Original Project Name]) and **strictly adheres to the original project's Apache-2.0 open source license**. All modified code also complies with Apache-2.0 license terms.
+This branch is modified from the original repository (Roo Code) and **strictly adheres to the original project's Apache-2.0 open source license**. All modified code also complies with Apache-2.0 license terms.
 
 ## Key Modifications
 
